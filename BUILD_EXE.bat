@@ -24,13 +24,15 @@ if not errorlevel 1 (
   echo bleak didn't install cleanly - building without it ^(BLE Remote tab will say to install it^).
 )
 copy /y vizio_control.pyw vizio_control_build.py >nul
-python -m PyInstaller --onefile --windowed --name VizioControl --icon VizioControl.ico %BLEAK_FLAGS% vizio_control_build.py
-del vizio_control_build.py >nul 2>nul
+python -m PyInstaller --onefile --windowed --name VizioControl --icon VizioControl.ico %BLEAK_FLAGS% vizio_control_plus.py
 if exist dist\VizioControl.exe (
   copy /y dist\VizioControl.exe VizioControl.exe >nul
   echo.
   echo DONE! VizioControl.exe is in this folder. Double-click it to run.
 ) else (
   echo Build failed - see messages above.
+  pause
+  exit /b 1
 )
+if exist vizio_control_build.py del vizio_control_build.py >nul 2>nul
 pause
